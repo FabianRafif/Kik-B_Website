@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mochi Moon - Premium Mochi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #FF9AA2; /* Soft Pink */
+            --secondary: #B5EAD7; /* Mint Green */
+            --accent: #FFDAC1; /* Peach */
+            --text: #4A4A4A;
+            --bg: #FFF9F9;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --radius: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.8rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: 1px;
+            cursor: pointer;
+        }
+
+        .logo img {
+            width: 50px; 
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-btn {
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-btn:hover, .nav-btn.active {
+            color: var(--primary);
+        }
+
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-btn:hover::after, .nav-btn.active::after {
+            width: 100%;
+        }
+
+        /* --- SECTIONS LOGIC --- */
+        section {
+            padding: 100px 5% 50px;
+            min-height: 100vh;
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        section.active-section {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HOME SECTION --- */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(135deg, #FFF0F0 0%, #FFFFFF 100%);
+        }
+        
+        #home.active-section {
+            display: flex;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .hero-text span {
+            color: var(--primary);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .ig-link {
+            font-weight: 700;
+            color: var(--primary);
+            transition: all 0.3s;
+        }
+        .ig-link:hover {
+            color: #d63384;
+            text-decoration: underline;
+        }
+
+        .wa-link {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 700;
+            color: #25D366;
+            background: #e8f5e9;
+            padding: 5px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            margin-left: 5px;
+        }
+        
+        .wa-link:hover {
+            background: #25D366;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(255, 154, 162, 0.4);
+            transition: transform 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            background-color: #ff858f;
+        }
+
+        .hero-img {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-img img {
+            width: 90%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            box-shadow: var(--shadow);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- OTHER SECTIONS --- */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .about-img img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: var(--radius);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            text-align: center;
+            padding-bottom: 2rem;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img-container {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .badge-choco { background: #EAD1C3; color: #5D4037; }
+        .badge-berry { background: #FFD1DC; color: #C2185B; }
+        .badge-matcha { background: #D4EDDA; color: #155724; }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+            display: block;
+        }
+
+        /* --- CONTACT --- */
+        .contact-container {
+            display: flex;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .info-item i {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 15px;
+            width: 30px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-family: inherit;
+            transition: border 0.3s;
+        }
+
+        form input:focus, form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        /* --- PAYMENT MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            transform: translateY(20px);
+            animation: slideUp 0.3s forwards;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            to { transform: translateY(0); }
+        }
+
+        .modal-header h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .modal-product-summary {
+            background: #FFF9F9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px dashed var(--primary);
+        }
+
+        .modal-product-summary h4 {
+            margin-bottom: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .total-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: right;
+            margin: 15px 0;
+            color: var(--text);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-cancel {
+            background: #eee;
+            color: #666;
+            flex: 1;
+        }
+        
+        .btn-confirm {
+            background: var(--primary);
+            color: white;
+            flex: 2;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+                position: relative;
+            }
+            
+            .nav-links {
+                display: flex !important; 
+                width: 100%;
+                justify-content: center;
+                gap: 10px;
+                margin-top: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .nav-btn {
+                font-size: 0.9rem;
+                padding: 5px 10px;
+                background: rgba(255,154,162,0.1);
+                border-radius: 15px;
+            }
+
+            section {
+                padding: 30px 5% 50px;
+                min-height: auto;
+            }
+
+            #home {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding-top: 20px;
+            }
+
+            .hero-text {
+                padding-right: 0;
+                margin-top: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-img img {
+                width: 80%;
+            }
+
+            .about-content {
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+            
+            .about-img img {
+                width: 100%;
+                height: 250px;
+            }
+            
+            .about-text h3 {
+                font-size: 1.5rem;
+                margin-top: 1rem;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100%, 1fr)); 
+                gap: 1.5rem;
+            }
+
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .info-item {
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="showPage('home')">
+            <img src="LOGO.png" alt="Omochi Logo">
+            <div>OMO<span>CHI</span></div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-btn active" onclick="showPage('home')">Home</li>
+            <li class="nav-btn" onclick="showPage('about')">About Us</li>
+            <li class="nav-btn" onclick="showPage('products')">Product</li>
+            <li class="nav-btn" onclick="showPage('contact')">Contact</li>
+        </ul>
+    </nav>
+
+    <section id="home" class="active-section">
+        <div class="hero-text">
+            <h1>Lembutnya <br><span>Kebahagiaan</span></h1>
+            
+            <p>
+                Welcome to 
+                <a href="https://www.instagram.com/omochi.iid" target="_blank" class="ig-link">@omochi.iid</a>
+                <br>
+                Freshly made mochi ~ soft outside, creamy inside 💭
+                <br>
+                Matcha | Chocolate | Strawberry
+                <br><br>
+                DM us to order 
+                <a href="https://wa.me/6281326798544?text=Halo%20Omochi,%20saya%20ingin%20memesan%20mochi" target="_blank" class="wa-link">
+                    💌 WhatsApp
+                </a>
+            </p>
+
+            <button class="cta-btn" onclick="showPage('products')">Lihat Menu</button>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">Tentang Kami</h2>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="image_fedfd5.png" onerror="this.src='https://images.unsplash.com/photo-1570476922354-81227cdbb76c?auto=format&fit=crop&w=500&q=60'" alt="About Omochi">
+            </div>
+            <div class="about-text">
+                <h3>Warisan Rasa Tradisional</h3>
+                <p>Omochi dimulai dari dapur kecil di tahun 2020. Kami percaya bahwa mochi bukan sekadar camilan, tapi sebuah seni tekstur.</p>
+                <p>Kami hanya menggunakan tepung ketan berkualitas tinggi dan isian buah serta coklat asli tanpa pengawet buatan. Setiap butir mochi dibentuk dengan tangan (handmade) untuk memastikan kekenyalan yang pas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <h2 class="section-title">Menu Favorit</h2>
+        <div class="product-grid">
+            
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="3eafabe263d15d30457020753a721a54.jpg" onerror="this.src='https://images.unsplash.com/photo-1606313564200-e75d5e30476d?auto=format&fit=crop&w=500&q=60'" alt="Chocolate Mochi">
+                </div>
+                <div class="product-info">
+                    <span class="badge badge-choco">Best Seller</span>
+                    <h3 class="p-name">Choco Lava</h3>
+                    <p>Mochi lembut dengan isian ganache coklat Belgia yang lumer di mulut.</p>
+                    <span class="price" data-price="15000">Rp 15.000 / pcs</span>
+                    <button class="cta-btn" onclick="openPayment(this)">Beli</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="mochi stoberi.jpg" onerror="this.src='https://images.unsplash.com/photo-1533512930432-84306c968f44?auto=format&fit=crop&w=500&q=60'" alt="Strawberry Mochi">
+                </div>
+                <div class="product-info">
+                    <span class="badge badge-berry">Fresh Fruit</span>
+                    <h3 class="p-name">Ichigo Daifuku</h3>
+                    <p>Perpaduan stroberi segar utuh dan pasta kacang merah manis.</p>
+                    <span class="price" data-price="18000">Rp 18.000 / pcs</span>
+                    <button class="cta-btn" onclick="openPayment(this)">Beli</button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="21e51846f121b7c2243e819f8868694a.jpg" onerror="this.src='https://images.unsplash.com/photo-1623689405022-7776269600e1?auto=format&fit=crop&w=500&q=60'" alt="Matcha Mochi">
+                </div>
+                <div class="product-info">
+                    <span class="badge badge-matcha">Premium</span>
+                    <h3 class="p-name">Kyoto Matcha</h3>
+                    <p>Isian krim matcha autentik Jepang dengan sedikit rasa pahit yang elegan.</p>
+                    <span class="price" data-price="16000">Rp 16.000 / pcs</span>
+                    <button class="cta-btn" onclick="openPayment(this)">Beli</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title">Hubungi Kami</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Jl. Manis No. 123, Jakarta Selatan</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+62 813-2679-8544</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>halo@omochi.id</span>
+                </div>
+                <div class="info-item">
+                    <i class="fab fa-instagram"></i>
+                    <a href="https://www.instagram.com/omochi.iid" target="_blank" style="color: inherit;">@omochi.iid</a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <input type="text" id="contact-name" placeholder="Nama Kamu">
+                    <input type="email" id="contact-email" placeholder="Email">
+                    <textarea id="contact-message" rows="5" placeholder="Pesan Pesanan..."></textarea>
+                    
+                    <button class="cta-btn" type="button" onclick="sendContactMessage()">Kirim Pesan</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="paymentModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Formulir Pemesanan</h3>
+                <p>Silakan lengkapi detail pesanan Anda</p>
+            </div>
+            
+            <div class="modal-product-summary">
+                <h4 id="modal-p-name">Nama Produk</h4>
+                <p id="modal-p-price" style="color: var(--primary); font-weight: 600;">Rp 0</p>
+            </div>
+
+            <div class="modal-form">
+                <div class="form-group">
+                    <label>Nama Pemesan</label>
+                    <input type="text" id="buyer-name" placeholder="Contoh: Budi">
+                </div>
+                <div class="form-group">
+                    <label>Jumlah (Pcs)</label>
+                    <input type="number" id="buyer-qty" value="1" min="1" onchange="updateTotal()">
+                </div>
+                
+                <div class="total-display">
+                    Total: <span id="total-price" style="color: var(--primary);">Rp 0</span>
+                </div>
+
+                <div class="modal-buttons">
+                    <button class="cta-btn btn-cancel" onclick="closePayment()">Batal</button>
+                    <button class="cta-btn btn-confirm" onclick="processOrder()">Konfirmasi Pesanan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- NAVIGATION LOGIC ---
+        function showPage(pageId) {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(sec => {
+                sec.classList.remove('active-section');
+                if(sec.id === 'home') sec.style.display = 'none'; 
+                else sec.style.display = 'none';
+            });
+
+            const target = document.getElementById(pageId);
+            target.classList.add('active-section');
+            if(pageId === 'home') target.style.display = 'flex';
+            else target.style.display = 'block';
+
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Cari tombol nav yang sesuai dan aktifkan
+            navButtons.forEach(btn => {
+                if(btn.getAttribute('onclick').includes(pageId)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            window.scrollTo(0, 0);
+        }
+
+        // --- PAYMENT MODAL LOGIC ---
+        let currentPrice = 0;
+        let currentProduct = "";
+
+        function openPayment(button) {
+            // Ambil data dari card produk tempat tombol ditekan
+            const card = button.closest('.product-card');
+            const name = card.querySelector('.p-name').innerText;
+            // Ambil harga mentah dari atribut data-price
+            const priceRaw = card.querySelector('.price').getAttribute('data-price');
+            
+            currentProduct = name;
+            currentPrice = parseInt(priceRaw);
+
+            // Isi data ke modal
+            document.getElementById('modal-p-name').innerText = currentProduct;
+            document.getElementById('modal-p-price').innerText = formatRupiah(currentPrice) + " / pcs";
+            document.getElementById('buyer-qty').value = 1;
+            
+            updateTotal();
+
+            // Tampilkan modal
+            document.getElementById('paymentModal').style.display = 'flex';
+        }
+
+        function closePayment() {
+            document.getElementById('paymentModal').style.display = 'none';
+        }
+
+        function updateTotal() {
+            const qty = document.getElementById('buyer-qty').value;
+            const total = currentPrice * qty;
+            document.getElementById('total-price').innerText = formatRupiah(total);
+        }
+
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+        }
+
+        function processOrder() {
+            const name = document.getElementById('buyer-name').value;
+            const qty = document.getElementById('buyer-qty').value;
+            const total = document.getElementById('total-price').innerText;
+
+            if(name === "") {
+                alert("Mohon isi nama Anda terlebih dahulu.");
+                return;
+            }
+
+            // Buat Pesan WhatsApp Otomatis
+            const message = `Halo Omochi, saya ingin memesan:%0A%0A` +
+                            `🛍️ Produk: *${currentProduct}*%0A` +
+                            `🔢 Jumlah: *${qty} pcs*%0A` +
+                            `💰 Total: *${total}*%0A` +
+                            `👤 Nama: *${name}*%0A%0A` +
+                            `Mohon info pembayarannya. Terima kasih!`;
+
+            // Buka WhatsApp
+            const waNumber = "6281326798544"; 
+            const url = `https://wa.me/${waNumber}?text=${message}`;
+            
+            window.open(url, '_blank');
+            closePayment();
+        }
+
+        // --- CONTACT FORM LOGIC (BUG FIX) ---
+        function sendContactMessage() {
+            // Ambil nilai dari input form contact
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const msg = document.getElementById('contact-message').value;
+
+            // Validasi sederhana
+            if(name === "" || msg === "") {
+                alert("Mohon lengkapi Nama dan Pesan.");
+                return;
+            }
+
+            // Format pesan untuk WhatsApp
+            const waMessage = `Halo Admin Omochi, saya ingin bertanya via Website:%0A%0A` +
+                              `👤 Nama: ${name}%0A` +
+                              `📧 Email: ${email}%0A` +
+                              `💬 Pesan: ${msg}`;
+
+            // Kirim ke nomor WhatsApp yang sama dengan pemesanan
+            const waNumber = "6281326798544";
+            const url = `https://wa.me/${waNumber}?text=${waMessage}`;
+            
+            window.open(url, '_blank');
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Init logic if needed
+        });
+    </script>
+</body>
+</html>
