@@ -32,9 +32,62 @@
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
+            /* Background utama dipertahankan */
+            background-image: linear-gradient(rgba(255, 249, 249, 0.75), rgba(255, 249, 249, 0.85)), url('https://images.unsplash.com/photo-1518655048521-f130df041f66?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: var(--text);
             overflow-x: hidden;
+            position: relative;
         }
+
+        /* --- TAMBAHAN BACKGROUND ANIMASI MOCHI MELAYANG --- */
+        .mochi-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Berada di paling belakang */
+            overflow: hidden;
+            pointer-events: none; /* Agar tidak mengganggu klik pada website */
+        }
+
+        .mochi-blob {
+            position: absolute;
+            bottom: -150px;
+            /* Bentuk abstrak melengkung menyerupai mochi yang kenyal */
+            border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+            /* Efek 3D bayangan agar terlihat seperti gumpalan nyata */
+            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.05);
+            opacity: 0.6;
+            animation: floatUp infinite linear;
+        }
+
+        /* Variasi ukuran, warna, dan kecepatan animasi mochi */
+        .blob-1 { background: var(--primary); width: 80px; height: 75px; left: 10%; animation-duration: 15s; }
+        .blob-2 { background: var(--secondary); width: 120px; height: 110px; left: 30%; animation-duration: 22s; animation-delay: 2s; }
+        .blob-3 { background: var(--accent); width: 60px; height: 55px; left: 60%; animation-duration: 18s; animation-delay: 5s; }
+        .blob-4 { background: var(--white); width: 90px; height: 85px; left: 80%; animation-duration: 25s; animation-delay: 1s; }
+        .blob-5 { background: var(--primary); width: 100px; height: 95px; left: 50%; animation-duration: 20s; animation-delay: 8s; opacity: 0.4; }
+        .blob-6 { background: var(--secondary); width: 70px; height: 65px; left: 85%; animation-duration: 16s; animation-delay: 12s; }
+        .blob-7 { background: var(--accent); width: 110px; height: 100px; left: 15%; animation-duration: 24s; animation-delay: 10s; opacity: 0.5; }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+            }
+            50% {
+                transform: translateY(-60vh) rotate(180deg) scale(1.1);
+                /* Sedikit berubah bentuk saat melayang (efek squishy) */
+                border-radius: 55% 45% 40% 60% / 50% 50% 50% 50%;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(360deg) scale(1);
+            }
+        }
+        /* --- END TAMBAHAN ANIMASI --- */
 
         h1, h2, h3 {
             font-family: 'Fredoka', sans-serif;
@@ -45,7 +98,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.90);
             padding: 0.8rem 5%;
             display: flex;
             justify-content: space-between;
@@ -118,6 +171,8 @@
             min-height: 100vh;
             display: none;
             animation: fadeIn 0.6s ease-in-out;
+            position: relative; /* Agar content tetap di atas background animasi */
+            z-index: 1;
         }
 
         section.active-section {
@@ -134,7 +189,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: linear-gradient(135deg, #FFF0F0 0%, #FFFFFF 100%);
+            background: transparent;
         }
         
         #home.active-section {
@@ -179,7 +234,7 @@
             align-items: center;
             font-weight: 700;
             color: #25D366;
-            background: #e8f5e9;
+            background: rgba(232, 245, 233, 0.9);
             padding: 5px 10px;
             border-radius: 8px;
             transition: all 0.3s;
@@ -236,16 +291,19 @@
             font-size: 2.5rem;
             margin-bottom: 3rem;
             color: var(--text);
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.8);
         }
 
         .about-content {
             display: flex;
             align-items: center;
             gap: 4rem;
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.85); /* Efek kaca elegan */
+            backdrop-filter: blur(12px);
             padding: 3rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
         .about-img img {
@@ -263,7 +321,7 @@
 
         .about-text p {
             line-height: 1.8;
-            color: #666;
+            color: #555;
             margin-bottom: 1rem;
         }
 
@@ -274,7 +332,9 @@
         }
 
         .product-card {
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.90); /* Efek kaca elegan */
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.5);
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
@@ -338,7 +398,9 @@
 
         .contact-info, .contact-form {
             flex: 1;
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.90); /* Efek kaca elegan */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.5);
             padding: 2rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
@@ -366,11 +428,13 @@
             border-radius: 10px;
             font-family: inherit;
             transition: border 0.3s;
+            background: rgba(255, 255, 255, 0.8);
         }
 
         form input:focus, form textarea:focus {
             outline: none;
             border-color: var(--primary);
+            background: #fff;
         }
 
         /* --- PAYMENT MODAL STYLES --- */
@@ -380,81 +444,172 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(255, 154, 162, 0.2);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 2000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .modal-box {
             background: white;
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 2.5rem;
+            border-radius: 30px; 
             width: 90%;
-            max-width: 400px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            max-width: 420px;
+            box-shadow: 0 20px 50px rgba(255, 154, 162, 0.2);
             transform: translateY(20px);
-            animation: slideUp 0.3s forwards;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         @keyframes slideUp {
-            to { transform: translateY(0); }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         .modal-header h3 {
             color: var(--primary);
+            font-size: 1.8rem;
             margin-bottom: 5px;
         }
         
+        .modal-header p {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
         .modal-product-summary {
-            background: #FFF9F9;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 1px dashed var(--primary);
+            background: linear-gradient(135deg, #FFF9F9 0%, #FFF0F0 100%);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border: 2px dashed var(--primary);
+            text-align: center;
         }
 
         .modal-product-summary h4 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.4rem;
+            color: var(--text);
             margin-bottom: 5px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: #666;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text);
+            padding-left: 5px;
+        }
+
+        .form-group input {
+            background: #fdfdfd;
+            border: 2px solid #FEE2E2;
+            border-radius: 15px;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 154, 162, 0.1);
         }
 
         .total-display {
-            font-size: 1.2rem;
-            font-weight: 700;
+            background: var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
             text-align: right;
-            margin: 15px 0;
-            color: var(--text);
+            margin: 20px 0;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-display span {
+            font-size: 1.4rem;
+            font-family: 'Fredoka', sans-serif;
         }
 
         .modal-buttons {
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            margin-top: 10px;
         }
 
         .btn-cancel {
-            background: #eee;
-            color: #666;
+            background: #F5F5F5 !important;
+            color: #999 !important;
+            box-shadow: none !important;
             flex: 1;
         }
         
         .btn-confirm {
-            background: var(--primary);
-            color: white;
+            background: var(--primary) !important;
             flex: 2;
+        }
+
+        /* --- STORE CLOSED OVERLAY STYLES --- */
+        .closed-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 249, 249, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: none; /* Disembunyikan secara default */
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .closed-message {
+            background: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 2px dashed var(--primary);
+            max-width: 90%;
+            animation: slideUp 0.5s ease;
+        }
+
+        .closed-message i {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .closed-message h2 {
+            font-size: 2rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .closed-message p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
         }
 
         /* --- RESPONSIVE --- */
@@ -537,6 +692,25 @@
 </head>
 <body>
 
+    <div id="store-closed-overlay" class="closed-overlay">
+        <div class="closed-message">
+            <i class="fas fa-moon"></i>
+            <h2>Toko Sedang Tutup</h2>
+            <p>Jam operasional Omochi adalah <strong>08:00 - 22:00 WIB</strong>.</p>
+            <p>Silakan kembali lagi esok hari untuk memesan mochi favoritmu ya!</p>
+        </div>
+    </div>
+
+    <div class="mochi-bg-container">
+        <div class="mochi-blob blob-1"></div>
+        <div class="mochi-blob blob-2"></div>
+        <div class="mochi-blob blob-3"></div>
+        <div class="mochi-blob blob-4"></div>
+        <div class="mochi-blob blob-5"></div>
+        <div class="mochi-blob blob-6"></div>
+        <div class="mochi-blob blob-7"></div>
+    </div>
+
     <nav>
         <div class="logo" onclick="showPage('home')">
             <img src="LOGO.png" alt="Omochi Logo">
@@ -569,6 +743,10 @@
             </p>
 
             <button class="cta-btn" onclick="showPage('products')">Lihat Menu</button>
+        </div>
+        <div class="hero-img">
+            <img src="FOTO.jpg" onerror="this.src='https://images.unsplash.com/photo-1570476922354-81227cdbb76c?auto=format&fit=crop&w=500&q=80'" alt="Omochi Hero Image">
+        </div>
     </section>
 
     <section id="about">
@@ -597,7 +775,7 @@
                     <span class="badge badge-choco">Best Seller</span>
                     <h3 class="p-name">Choco Lava</h3>
                     <p>Mochi lembut dengan isian ganache coklat Belgia yang lumer di mulut.</p>
-                    <span class="price" data-price="15000">Rp 15.000 / pcs</span>
+                    <span class="price" data-price="5000">Rp 5.000 / pcs</span>
                     <button class="cta-btn" onclick="openPayment(this)">Beli</button>
                 </div>
             </div>
@@ -610,7 +788,7 @@
                     <span class="badge badge-berry">Fresh Fruit</span>
                     <h3 class="p-name">Ichigo Daifuku</h3>
                     <p>Perpaduan stroberi segar utuh dan pasta kacang merah manis.</p>
-                    <span class="price" data-price="18000">Rp 18.000 / pcs</span>
+                    <span class="price" data-price="5000">Rp 5.000 / pcs</span>
                     <button class="cta-btn" onclick="openPayment(this)">Beli</button>
                 </div>
             </div>
@@ -623,7 +801,7 @@
                     <span class="badge badge-matcha">Premium</span>
                     <h3 class="p-name">Kyoto Matcha</h3>
                     <p>Isian krim matcha autentik Jepang dengan sedikit rasa pahit yang elegan.</p>
-                    <span class="price" data-price="16000">Rp 16.000 / pcs</span>
+                    <span class="price" data-price="5000">Rp 5.000 / pcs</span>
                     <button class="cta-btn" onclick="openPayment(this)">Beli</button>
                 </div>
             </div>
@@ -637,11 +815,11 @@
             <div class="contact-info">
                 <div class="info-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span>Jl. Manis No. 123, Jakarta Selatan</span>
+                    <span>Jl. DI Panjaitan No.128, Karangreja, Purwokerto</span>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-phone"></i>
-                    <span>+62 813-2679-8544</span>
+                    <a href="https://wa.me/6281326798544" target="_blank" style="color: inherit;">+62 813-2679-8544</a>
                 </div>
                 <div class="info-item">
                     <i class="fas fa-envelope"></i>
@@ -668,26 +846,27 @@
         <div class="modal-box">
             <div class="modal-header">
                 <h3>Formulir Pemesanan</h3>
-                <p>Silakan lengkapi detail pesanan Anda</p>
+                <p>Manjakan dirimu dengan kelembutan Omochi</p>
             </div>
             
             <div class="modal-product-summary">
                 <h4 id="modal-p-name">Nama Produk</h4>
-                <p id="modal-p-price" style="color: var(--primary); font-weight: 600;">Rp 0</p>
+                <p id="modal-p-price">Rp 0</p>
             </div>
 
             <div class="modal-form">
                 <div class="form-group">
-                    <label>Nama Pemesan</label>
-                    <input type="text" id="buyer-name" placeholder="Contoh: Budi">
+                    <label><i class="fas fa-user"></i> Nama Pemesan</label>
+                    <input type="text" id="buyer-name" placeholder="Masukkan nama kamu...">
                 </div>
                 <div class="form-group">
-                    <label>Jumlah (Pcs)</label>
+                    <label><i class="fas fa-shopping-basket"></i> Jumlah (Pcs)</label>
                     <input type="number" id="buyer-qty" value="1" min="1" onchange="updateTotal()">
                 </div>
                 
                 <div class="total-display">
-                    Total: <span id="total-price" style="color: var(--primary);">Rp 0</span>
+                    <span>Total Pembayaran:</span>
+                    <span id="total-price" style="color: var(--primary);">Rp 0</span>
                 </div>
 
                 <div class="modal-buttons">
@@ -699,6 +878,22 @@
     </div>
 
     <script>
+        // --- OPERATIONAL HOURS LOGIC ---
+        function checkOperationalHours() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            const overlay = document.getElementById('store-closed-overlay');
+            
+            // Tutup jika jam 22:00 ke atas (22, 23) ATAU sebelum jam 08:00 (0, 1, 2, 3, 4, 5, 6, 7)
+            if (currentHour >= 22 || currentHour < 8) {
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Nonaktifkan scroll supaya web tidak bisa dilihat
+            } else {
+                overlay.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Kembalikan scroll
+            }
+        }
+
         // --- NAVIGATION LOGIC ---
         function showPage(pageId) {
             const sections = document.querySelectorAll('section');
@@ -731,23 +926,19 @@
         let currentProduct = "";
 
         function openPayment(button) {
-            // Ambil data dari card produk tempat tombol ditekan
             const card = button.closest('.product-card');
             const name = card.querySelector('.p-name').innerText;
-            // Ambil harga mentah dari atribut data-price
             const priceRaw = card.querySelector('.price').getAttribute('data-price');
             
             currentProduct = name;
             currentPrice = parseInt(priceRaw);
 
-            // Isi data ke modal
             document.getElementById('modal-p-name').innerText = currentProduct;
             document.getElementById('modal-p-price').innerText = formatRupiah(currentPrice) + " / pcs";
             document.getElementById('buyer-qty').value = 1;
             
             updateTotal();
 
-            // Tampilkan modal
             document.getElementById('paymentModal').style.display = 'flex';
         }
 
@@ -775,42 +966,64 @@
                 return;
             }
 
-            // Buat Pesan WhatsApp Otomatis
-            const message = `Halo Omochi, saya ingin memesan:%0A%0A` +
-                            `🛍️ Produk: *${currentProduct}*%0A` +
-                            `🔢 Jumlah: *${qty} pcs*%0A` +
-                            `💰 Total: *${total}*%0A` +
-                            `👤 Nama: *${name}*%0A%0A` +
-                            `Mohon info pembayarannya. Terima kasih!`;
+            const orderId = "OMC" + Math.floor(Math.random() * 100000);
+            const now = new Date();
+            const date = now.toLocaleString("id-ID");
 
-            // Buka WhatsApp
-            const waNumber = "6281326798544"; 
+            const rawMessage = 
+`Omochi - Official Receipt
+--------------------------
+Order ID : ${orderId}
+Tanggal  : ${date}
+--------------------------
+Produk   : ${currentProduct}
+Jumlah   : ${qty} pcs
+Harga    : ${formatRupiah(currentPrice)}
+--------------------------
+TOTAL    : ${total}
+--------------------------
+Nama     : ${name}
+--------------------------
+Mohon info pembayaran ya kak.
+Terima kasih sudah order di Omochi`;
+
+            const message = encodeURIComponent(rawMessage);
+
+            const waNumber = "6281326798544";
             const url = `https://wa.me/${waNumber}?text=${message}`;
-            
+
             window.open(url, '_blank');
+
             closePayment();
         }
 
-        // --- CONTACT FORM LOGIC (BUG FIX) ---
+        // --- CONTACT FORM LOGIC ---
         function sendContactMessage() {
-            // Ambil nilai dari input form contact
             const name = document.getElementById('contact-name').value;
             const email = document.getElementById('contact-email').value;
             const msg = document.getElementById('contact-message').value;
 
-            // Validasi sederhana
             if(name === "" || msg === "") {
                 alert("Mohon lengkapi Nama dan Pesan.");
                 return;
             }
 
-            // Format pesan untuk WhatsApp
-            const waMessage = `Halo Admin Omochi, saya ingin bertanya via Website:%0A%0A` +
-                              `👤 Nama: ${name}%0A` +
-                              `📧 Email: ${email}%0A` +
-                              `💬 Pesan: ${msg}`;
+            fetch('http://localhost:3000/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, message: msg })
+            })
+            .then(res => res.text())
+            .then(data => console.log(data))
+            .catch(err => console.error(err));
 
-            // Kirim ke nomor WhatsApp yang sama dengan pemesanan
+            const waMessage = `Halo Admin Omochi:%0A%0A` +
+                              `Nama: ${name}%0A` +
+                              `Email: ${email}%0A` +
+                              `Pesan: ${msg}`;
+
             const waNumber = "6281326798544";
             const url = `https://wa.me/${waNumber}?text=${waMessage}`;
             
@@ -818,7 +1031,12 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            // Init logic if needed
+            // Cek jam operasional saat halaman pertama kali dibuka
+            checkOperationalHours();
+            
+            // Set interval agar web mengecek jam setiap 1 menit (60000 ms) 
+            // Jadi kalau pengguna stay di halaman sampai jam 22:00, otomatis ketutup tanpa direfresh
+            setInterval(checkOperationalHours, 60000);
         });
     </script>
 </body>
